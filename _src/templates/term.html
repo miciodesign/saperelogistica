@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block ogtype %}article{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"DefinedTerm","name":{{ t.term|tojson }},"description":{{ t.description|tojson }},"url":"{{ site_url }}{{ t.url }}","inLanguage":"it-IT","inDefinedTermSet":{"@type":"DefinedTermSet","name":"Glossario della logistica","url":"{{ site_url }}/glossario/"}}
+</script>
+{% endblock %}
+{% block content %}
+<article class="wrap article">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <a href="/glossario/">Glossario</a> › <a href="{{ t.area_obj.url }}">{{ t.area_obj.name }}</a></nav>
+    <h1>{{ t.term }}{% if t.sigla %} <span class="sigla">{{ t.sigla }}</span>{% endif %}</h1>
+    <p class="lead">{{ t.description }}</p>
+    <p class="meta">Redazione {{ site.name }}{% if t.updated_human %} · Aggiornato il {{ t.updated_human }}{% endif %}{% if t.sigla and t.esteso %} · {{ t.esteso }}{% endif %}</p>
+  </header>
+
+  <div class="article-grid">
+    <aside class="toc">
+      {% if t.related_obj %}
+      <p class="toc-title">Voci collegate</p>
+      <ul>
+        {% for r in t.related_obj %}<li><a href="{{ r.url }}">{{ r.term }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+      <p class="toc-title" style="margin-top:14px">Area</p>
+      <ul><li><a href="{{ t.area_obj.url }}">{{ t.area_obj.name }}</a></li></ul>
+    </aside>
+    <div class="article-body">
+      {{ t.body|safe }}
+    </div>
+  </div>
+
+  <footer class="article-foot">
+    <p class="small muted">Questa voce è scritta dalla redazione e verificata sulle fonti indicate. Se trovi un errore o una norma superata, scrivi a {{ site.email }}: correggiamo e lo dichiariamo nel <a href="/correzioni/">registro delle correzioni</a>.</p>
+  </footer>
+</article>
+{% endblock %}

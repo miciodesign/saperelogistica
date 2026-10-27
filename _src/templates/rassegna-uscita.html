@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block ogtype %}article{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NewsArticle","headline":{{ a.title|tojson }},"description":{{ a.description|tojson }},"datePublished":"{{ a.date_iso }}","dateModified":"{{ a.updated_iso }}","inLanguage":"it-IT","author":{"@type":"Organization","name":"Redazione {{ site.name }}","url":"{{ site_url }}/chi-siamo/"},"publisher":{"@type":"Organization","name":"{{ site.name }}","url":"{{ site_url }}/"},"mainEntityOfPage":"{{ site_url }}{{ a.url }}"}
+</script>
+{% endblock %}
+{% block content %}
+<article class="wrap article">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <a href="/rassegna/">Rassegna settimanale</a></nav>
+    <h1>{{ a.title }}</h1>
+    <p class="lead">{{ a.description }}</p>
+    <p class="meta">Redazione {{ site.name }} · {{ a.date_human }}{% if a.updated_iso != a.date_iso %} · aggiornata il {{ a.updated_human }}{% endif %} · {{ a.minutes }} minuti di lettura</p>
+  </header>
+  <div class="article-grid">
+    {% if a.toc %}<aside class="toc"><p class="toc-title">In questa uscita</p>{{ a.toc|safe }}</aside>{% endif %}
+    <div class="article-body">{{ a.body|safe }}</div>
+  </div>
+  <footer class="article-foot">
+    <p class="small muted">Prezzi e indici sono quelli pubblicati dalle fonti indicate alla data di rilevazione. Errori o fonti mancanti: {{ site.email }}. Le correzioni sono <a href="/correzioni/">dichiarate</a>.</p>
+    <p class="small">{% if prev %}← <a href="{{ prev.url }}">{{ prev.title }}</a>{% endif %}{% if prev and nxt %} · {% endif %}{% if nxt %}<a href="{{ nxt.url }}">{{ nxt.title }}</a> →{% endif %}</p>
+  </footer>
+</article>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="wrap section">
+  <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <a href="/glossario/">Glossario</a> › <span>{{ area.name }}</span></nav>
+  <h1>{{ area.name }}</h1>
+  <p class="lead">{{ area.intro }}</p>
+</section>
+
+<section class="wrap section">
+  {% if area.terms %}
+  <ul class="gl-list">
+    {% for t in area.terms %}
+    <li class="gl-item">
+      <a href="{{ t.url }}"><strong>{{ t.term }}</strong>{% if t.sigla %} <span class="muted">({{ t.sigla }})</span>{% endif %}</a>
+      <p class="muted small">{{ t.description }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div class="notice"><p><strong>Le voci di quest'area sono in scrittura.</strong> Arrivano nelle prossime settimane.</p></div>
+  {% endif %}
+</section>
+
+<section class="wrap section">
+  <h2 class="h3">Le altre aree</h2>
+  <div class="hero-cats">
+    {% for a in areas if a.slug != area.slug %}<a class="chip" href="{{ a.url }}">{{ a.name }}</a>{% endfor %}
+  </div>
+</section>
+{% endblock %}

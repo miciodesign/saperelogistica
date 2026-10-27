@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="wrap section">
+  <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <span>Rassegna settimanale</span></nav>
+  <h1>Rassegna settimanale</h1>
+  <p class="lead">Ogni {{ rassegna_cfg.giorno }}, in una pagina: le norme pubblicate o entrate in vigore, i prezzi e gli indici di riferimento, le scadenze del periodo e i numeri del settore. Ogni notizia ha accanto il link alla fonte originale.</p>
+</section>
+
+<section class="wrap section">
+  {% if rassegna %}
+  <div class="post-list">
+    {% for a in rassegna %}
+    <article class="post-card">
+      <p class="post-cat">{{ a.date_human }} · {{ a.minutes }} min</p>
+      <h2 class="h3"><a href="{{ a.url }}">{{ a.title }}</a></h2>
+      <p class="muted">{{ a.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="notice">
+    <p><strong>La prima uscita è in preparazione.</strong> Il glossario e il programma del corso sono già consultabili; la rassegna parte quando la redazione ha una settimana completa di fonti verificate da pubblicare.</p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="wrap section">
+  <div class="article-body narrow">
+    <h2>Il formato</h2>
+    <p>Ogni uscita ha le stesse quattro sezioni, nello stesso ordine, così si sa dove guardare:</p>
+    <ol>
+      <li><strong>Norme e regole.</strong> Cosa è stato pubblicato in Gazzetta Ufficiale o sulla Gazzetta ufficiale dell'Unione europea, cosa entra in vigore, cosa è in consultazione. Con il riferimento esatto (numero, data, articolo).</li>
+      <li><strong>Prezzi e indici.</strong> Gasolio, noli, indici dei costi, tariffe di riferimento: il valore, la fonte e la data di rilevazione. Mai un numero senza queste tre cose.</li>
+      <li><strong>Scadenze.</strong> Adempimenti, bandi e termini che cadono nelle due settimane successive.</li>
+      <li><strong>Numeri del settore.</strong> I dati statistici usciti nella settimana (ISTAT, Eurostat, autorità portuali, associazioni di categoria), con la nota su come sono stati calcolati.</li>
+    </ol>
+    <h2>Cosa non c'è</h2>
+    <p>Non riscriviamo comunicati stampa, non pubblichiamo notizie senza fonte verificabile, non commentiamo. Se una notizia è di un singolo operatore o di un'associazione, lo diciamo. Le notizie quotidiane non sono previste in questa fase: prima vengono il glossario e il corso.</p>
+    <h2>Le fonti che seguiamo</h2>
+    <p>Gazzetta Ufficiale della Repubblica Italiana, EUR-Lex, Ministero delle Infrastrutture e dei Trasporti, Agenzia delle Dogane e dei Monopoli, Ministero dell'Ambiente e della Sicurezza Energetica per i prezzi dei carburanti, ISTAT, Eurostat, Banca d'Italia, Assoporti e le autorità di sistema portuale, le associazioni di categoria dell'autotrasporto e della logistica. L'elenco completo, con il tipo di dato che prendiamo da ciascuna, è nella pagina <a href="/metodo/">Il metodo</a>.</p>
+    <p>Per ricevere la rassegna c'è il <a href="/feed.xml">feed RSS</a>. La newsletter arriva più avanti.</p>
+  </div>
+</section>
+{% endblock %}

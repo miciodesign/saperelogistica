@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":{{ corso_cfg.name|tojson }},"description":"Corso di aggiornamento in logistica in dodici moduli: regole, documenti, strumenti e indicatori, con esercizi su casi reali. Rilascia un attestato di partecipazione, non una certificazione.","inLanguage":"it-IT","provider":{"@type":"Organization","name":"{{ site.name }}","url":"{{ site_url }}/"},"url":"{{ site_url }}/corso/"}
+</script>
+{% endblock %}
+{% block content %}
+<section class="wrap section">
+  <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <span>Corso di aggiornamento</span></nav>
+  <h1>{{ corso_cfg.name }}</h1>
+  <p class="lead">{{ corso|length }} moduli per chi lavora già in logistica e vuole rimettersi in pari con regole, documenti, strumenti e indicatori. È un corso di <strong>aggiornamento</strong>, non di certificazione: alla fine rilascia un attestato di partecipazione, non un titolo abilitante.</p>
+  <div class="notice">
+    <p><strong>Stato: {{ corso_cfg.stato }}.</strong> {{ corso_cfg.nota_prezzo }} Qui sotto trovi il programma completo, modulo per modulo. Per essere avvisato all'apertura delle iscrizioni scrivi a {{ site.email }} con oggetto "Corso".</p>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="article-body narrow">
+    <h2>A chi serve</h2>
+    <p>A due tipi di persone, con moduli distinti per ciascuno e una parte comune:</p>
+    <ul>
+      <li><strong>Operativi e tecnici</strong>: addetti e capi magazzino, pianificatori, trasportisti, responsabili di deposito e di impianto. Moduli segnati con <span class="tag tag-op">operativo</span>.</li>
+      <li><strong>Uffici e responsabili</strong>: responsabili logistica e acquisti, ufficio spedizioni, ufficio dogane, titolari di piccole imprese di trasporto e logistica. Moduli segnati con <span class="tag tag-uf">ufficio</span>.</li>
+    </ul>
+    <p>I moduli <span class="tag tag-co">comune</span> sono per tutti e vanno fatti per primi.</p>
+    <h2>Come funziona</h2>
+    <ul>
+      <li>Ogni modulo: una lezione scritta (30-45 minuti di lettura), una scheda con le fonti ufficiali citate, un esercizio su un caso reale con la soluzione commentata, un test di autoverifica.</li>
+      <li>Nessun video obbligatorio: i contenuti sono testo e schede, consultabili anche dopo la fine del corso.</li>
+      <li>I contenuti si aggiornano quando cambia una norma o un prezzo di riferimento; chi è iscritto riceve l'avviso dell'aggiornamento con la data e la cosa cambiata.</li>
+      <li>Attestato di partecipazione a chi completa i moduli comuni più almeno quattro moduli del proprio percorso. Non è una certificazione, non sostituisce la formazione obbligatoria per legge (sicurezza, carrelli, ADR, CQC) e lo scriviamo anche sull'attestato.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="wrap section">
+  <h2>Il programma</h2>
+  <ol class="mod-list">
+    {% for m in corso %}
+    <li class="mod-card">
+      <p class="post-cat">Modulo {{ m.order }} · <span class="tag tag-{{ m.percorso[:2] }}">{{ m.percorso }}</span>{% if m.durata %} · {{ m.durata }}{% endif %}</p>
+      <h3><a href="{{ m.url }}">{{ m.title }}</a></h3>
+      <p class="muted">{{ m.description }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+{% endblock %}

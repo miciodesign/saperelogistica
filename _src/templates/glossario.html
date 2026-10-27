@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"DefinedTermSet","name":"Glossario della logistica","url":"{{ site_url }}/glossario/","inLanguage":"it-IT","publisher":{"@type":"Organization","name":"{{ site.name }}","url":"{{ site_url }}/"}}
+</script>
+{% endblock %}
+{% block content %}
+<section class="wrap section">
+  <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <span>Glossario</span></nav>
+  <h1>Glossario della logistica</h1>
+  <p class="lead">{{ n_terms }} voci in italiano, divise per area. Ogni voce spiega cos'è il termine, come si usa in pratica e a cosa fare attenzione, e indica la fonte ufficiale da cui viene la definizione quando esiste.</p>
+  <div class="hero-cats">
+    {% for a in areas %}<a class="chip" href="{{ a.url }}">{{ a.name }} <span class="muted">{{ a.terms|length }}</span></a>{% endfor %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="search-box">
+    <label for="q" class="small muted">Cerca una voce (filtra l'elenco qui sotto)</label>
+    <input id="q" type="search" placeholder="es. cross docking, Incoterms, FIFO" autocomplete="off" oninput="var v=this.value.toLowerCase();document.querySelectorAll('.gl-item').forEach(function(li){li.hidden=v&&li.dataset.k.indexOf(v)<0});document.querySelectorAll('.gl-letter').forEach(function(s){s.hidden=!s.querySelector('.gl-item:not([hidden])')})">
+  </div>
+  <nav class="letters" aria-label="Lettere">
+    {% for l in letters %}<a href="#lettera-{{ l }}">{{ l }}</a>{% endfor %}
+  </nav>
+  {% for l in letters %}
+  <section class="gl-letter" id="lettera-{{ l }}">
+    <h2 class="gl-h">{{ l }}</h2>
+    <ul class="gl-list">
+      {% for t in terms if t.letter == l %}
+      <li class="gl-item" data-k="{{ (t.term ~ ' ' ~ (t.sigla or '') ~ ' ' ~ t.description)|lower }}">
+        <a href="{{ t.url }}"><strong>{{ t.term }}</strong>{% if t.sigla %} <span class="muted">({{ t.sigla }})</span>{% endif %}</a>
+        <span class="gl-area"><a href="{{ t.area_obj.url }}">{{ t.area_obj.name }}</a></span>
+        <p class="muted small">{{ t.description }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</section>
+
+<section class="wrap section">
+  <div class="notice">
+    <p><strong>Manca una voce?</strong> Scrivici a {{ site.email }} indicando il termine e dove l'hai incontrato. Se una definizione è imprecisa, segnalalo: correggiamo e lo dichiariamo nel <a href="/correzioni/">registro delle correzioni</a>.</p>
+  </div>
+</section>
+{% endblock %}

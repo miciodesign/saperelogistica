@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow">Per chi lavora in logistica</p>
+      <h1>La professione logistica, <span>spiegata bene.</span></h1>
+      <p class="lead">Un glossario in italiano con la fonte ufficiale accanto a ogni voce, una rassegna settimanale di quello che cambia davvero, un corso per rimettersi in pari. Scritto da una redazione, non da un ufficio marketing.</p>
+      <div class="hero-cats">
+        <a class="chip chip-strong" href="/glossario/">Glossario · {{ n_terms }} voci</a>
+        <a class="chip" href="/rassegna/">Rassegna settimanale</a>
+        <a class="chip" href="/corso/">Corso di aggiornamento</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 100 100" width="100%" role="img"><rect x="6" y="32" width="54" height="54" rx="7" fill="var(--paper)" stroke="var(--ink)" stroke-width="4"/><path d="M6 52h54" stroke="var(--ink)" stroke-width="3"/><path d="M20 62h10M36 62h14M20 74h26" stroke="var(--line)" stroke-width="3" stroke-linecap="round"/><path d="M60 48h18l15 15v23H60z" fill="var(--accent)"/><path d="M78 48v15h15" fill="none" stroke="var(--paper)" stroke-width="3"/><circle cx="24" cy="90" r="7" fill="var(--ink)"/><circle cx="78" cy="90" r="7" fill="var(--ink)"/><path d="M38 8l12 12-12 12M12 20h38" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="section-head">
+    <h2>Il glossario, per area</h2>
+    <p class="muted">Ogni voce dice cos'è, come si usa in pratica, a cosa fare attenzione e da quale fonte ufficiale viene. Le voci si aggiornano quando cambia la norma, e l'aggiornamento è datato.</p>
+  </div>
+  <div class="cat-grid">
+    {% for a in areas %}
+    <a class="cat-card" href="{{ a.url }}">
+      <span class="cat-name">{{ a.name }}</span>
+      <span class="cat-short">{{ a.short }}</span>
+      <span class="cat-link">{{ a.terms|length }} voci →</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="two-col">
+    <div class="panel">
+      <p class="eyebrow">{{ rassegna_cfg.name }}</p>
+      <h2>Quello che è cambiato questa settimana</h2>
+      <p class="muted">Ogni {{ rassegna_cfg.giorno }}: norme, prezzi di riferimento, scadenze e numeri del settore, con il link alla fonte originale accanto a ogni notizia. Niente riscritture di comunicati stampa.</p>
+      {% if rassegna %}
+      <ul class="plain-list">
+        {% for a in rassegna[:4] %}<li><a href="{{ a.url }}">{{ a.title }}</a> <span class="muted small">· {{ a.date_human }}</span></li>{% endfor %}
+      </ul>
+      {% else %}
+      <p><strong>La prima uscita è in preparazione.</strong> Intanto trovi <a href="/rassegna/">il formato e le fonti che seguiamo</a>.</p>
+      {% endif %}
+      <a class="btn" href="/rassegna/">Vai alla rassegna</a>
+    </div>
+    <div class="panel panel-dark">
+      <p class="eyebrow">{{ corso_cfg.name }}</p>
+      <h2>Rimettersi in pari, non prendere un bollino</h2>
+      <p>{{ corso|length }} moduli su regole, documenti, strumenti e indicatori, con esercizi su casi reali. È un corso di aggiornamento: rilascia un attestato di partecipazione, non una certificazione.</p>
+      <p class="small">Stato: {{ corso_cfg.stato }}. {{ corso_cfg.nota_prezzo }}</p>
+      <a class="btn btn-light" href="/corso/">Vedi il programma</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="promise">
+    <h2>Come lavoriamo</h2>
+    <div class="promise-grid">
+      <div><strong>Fonti ufficiali, linkate.</strong><p class="muted">Norme da EUR-Lex e Gazzetta Ufficiale, dati da ISTAT, Eurostat, ministeri e autorità di settore. Se una cosa non ha una fonte verificabile, non la scriviamo come fatto.</p></div>
+      <div><strong>Prezzi verificati e datati.</strong><p class="muted">Quando citiamo un costo o una tariffa, diciamo dove l'abbiamo letto e quando. Un prezzo senza data non è un'informazione.</p></div>
+      <div><strong>Correzioni dichiarate.</strong><p class="muted">Se sbagliamo, correggiamo e lo scriviamo nel <a href="/correzioni/">registro delle correzioni</a>, con data e cosa è cambiato. Niente modifiche silenziose.</p></div>
+      <div><strong>Nessuna affiliazione.</strong><p class="muted">Non guadagniamo se clicchi su un link. Il sito si sostiene con il corso e con sponsor di settore, sempre dichiarati. <a href="/trasparenza/">I dettagli</a>.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

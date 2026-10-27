@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="wrap article">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <a href="/corso/">Corso di aggiornamento</a></nav>
+    <p class="post-cat">Modulo {{ m.order }} · <span class="tag tag-{{ m.percorso[:2] }}">{{ m.percorso }}</span>{% if m.durata %} · {{ m.durata }}{% endif %}</p>
+    <h1>{{ m.title }}</h1>
+    <p class="lead">{{ m.description }}</p>
+    <p class="meta">Stato del modulo: {{ m.stato or corso_cfg.stato }}</p>
+  </header>
+  <div class="article-grid">
+    <aside class="toc">
+      <p class="toc-title">Il programma</p>
+      <ul>
+        {% for x in corso %}<li>{% if x.slug == m.slug %}<strong>{{ x.order }}. {{ x.title }}</strong>{% else %}<a href="{{ x.url }}">{{ x.order }}. {{ x.title }}</a>{% endif %}</li>{% endfor %}
+      </ul>
+    </aside>
+    <div class="article-body">
+      {% if m.lezioni %}
+      <h2>Lezioni</h2>
+      <ol>{% for l in m.lezioni %}<li>{{ l }}</li>{% endfor %}</ol>
+      {% endif %}
+      {{ m.body|safe }}
+    </div>
+  </div>
+  <footer class="article-foot">
+    <p class="small">{% if prev %}← <a href="{{ prev.url }}">Modulo {{ prev.order }}: {{ prev.title }}</a>{% endif %}{% if prev and nxt %} · {% endif %}{% if nxt %}<a href="{{ nxt.url }}">Modulo {{ nxt.order }}: {{ nxt.title }}</a> →{% endif %}</p>
+    <p class="small muted">Il corso rilascia un attestato di partecipazione, non una certificazione, e non sostituisce la formazione obbligatoria prevista dalla legge.</p>
+  </footer>
+</article>
+{% endblock %}

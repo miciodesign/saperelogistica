@@ -1,0 +1,70 @@
+{
+  "name": "Sapere Logistica",
+  "name_html": "Sapere <em>Logistica</em>",
+  "title": "Sapere Logistica · La professione logistica, spiegata bene",
+  "description": "Glossario della logistica in italiano, rassegna settimanale e corso di aggiornamento per chi lavora in magazzino, nei trasporti e nella supply chain. Fonti ufficiali, prezzi verificati, correzioni dichiarate.",
+  "payoff": "La professione logistica, spiegata bene",
+  "site_url": "https://saperelogistica.it",
+  "email": "redazione@saperelogistica.it",
+  "linkedin": "",
+  "facebook": "",
+  "aree": [
+    {
+      "slug": "magazzino",
+      "name": "Magazzino",
+      "short": "Ricevimento, stoccaggio, picking, spedizione",
+      "intro": "I termini che si usano ogni giorno in un magazzino: dal ricevimento merce al picking, dalle unità di carico ai metodi di rotazione delle scorte."
+    },
+    {
+      "slug": "trasporti",
+      "name": "Trasporti",
+      "short": "Strada, mare, aereo, ferrovia, intermodale",
+      "intro": "Il lessico dei trasporti: tipi di servizio, documenti di viaggio, mezzi e unità di carico, dalla consegna in città al container oceanico."
+    },
+    {
+      "slug": "supply-chain",
+      "name": "Supply chain e pianificazione",
+      "short": "Scorte, previsioni, approvvigionamento, distribuzione",
+      "intro": "I concetti che tengono insieme la catena: come si pianificano scorte e approvvigionamenti, come si organizza la distribuzione e cosa succede quando qualcosa si rompe."
+    },
+    {
+      "slug": "dogane",
+      "name": "Dogane e commercio internazionale",
+      "short": "Incoterms, dichiarazioni, origine, IVA e accise",
+      "intro": "Quello che serve sapere quando la merce attraversa un confine: regole di resa, procedure doganali, codici, operatori autorizzati."
+    },
+    {
+      "slug": "normativa",
+      "name": "Normativa e sicurezza",
+      "short": "Autotrasporto, tempi di guida, merci pericolose, sicurezza sul lavoro",
+      "intro": "Le regole che governano il lavoro logistico in Italia e in Europa: contratto di trasporto, tempi di guida, merci pericolose, formazione obbligatoria."
+    },
+    {
+      "slug": "tecnologia",
+      "name": "Tecnologia e dati",
+      "short": "WMS, TMS, codici a barre, RFID, scambio dati",
+      "intro": "I sistemi e gli standard che fanno girare l'informazione insieme alla merce: software di magazzino e trasporto, identificazione automatica, scambio elettronico dei dati."
+    },
+    {
+      "slug": "indicatori",
+      "name": "Indicatori e costi",
+      "short": "KPI, livello di servizio, costi logistici",
+      "intro": "Come si misura la logistica: gli indicatori che si usano davvero nei report, come si calcolano e dove ingannano."
+    }
+  ],
+  "corso": {
+    "name": "Corso di aggiornamento in logistica",
+    "slug": "corso",
+    "short": "Dodici moduli per rimettersi in pari con regole, strumenti e indicatori",
+    "stato": "in preparazione",
+    "prezzo": "",
+    "nota_prezzo": "Il prezzo sarà pubblicato all'apertura delle iscrizioni."
+  },
+  "rassegna": {
+    "name": "Rassegna settimanale",
+    "slug": "rassegna",
+    "short": "Le notizie della settimana che contano per chi lavora in logistica, con la fonte accanto",
+    "giorno": "venerdì"
+  },
+  "sponsor": []
+}

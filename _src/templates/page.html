@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="wrap article">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <span>{{ p.title }}</span></nav>
+    <h1>{{ p.title }}</h1>
+    {% if p.description %}<p class="lead">{{ p.description }}</p>{% endif %}
+    {% if p.updated_human %}<p class="meta">Ultimo aggiornamento: {{ p.updated_human }}</p>{% endif %}
+  </header>
+  <div class="article-body narrow">
+    {{ p.body|safe }}
+  </div>
+</article>
+{% endblock %}

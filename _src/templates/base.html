@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<link rel="canonical" href="{{ site_url }}{{ page_url }}">
+<meta property="og:site_name" content="{{ site.name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:url" content="{{ site_url }}{{ page_url }}">
+<meta property="og:type" content="{% block ogtype %}website{% endblock %}">
+<meta property="og:image" content="{{ site_url }}/assets/og-default.png">
+<meta property="og:locale" content="it_IT">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/rss+xml" title="{{ site.name }} · Rassegna settimanale" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="/assets/style.css?v={{ build_date }}">
+{% block head %}{% endblock %}
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="/" aria-label="{{ site.name }}, home">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true"><rect x="8" y="30" width="52" height="52" rx="6" fill="none" stroke="currentColor" stroke-width="7"/><path d="M8 48h52" stroke="currentColor" stroke-width="5"/><path d="M60 46h18l14 14v22H60z" fill="var(--accent)"/><circle cx="26" cy="86" r="8" fill="var(--ink)"/><circle cx="76" cy="86" r="8" fill="var(--ink)"/><path d="M34 10l10 10-10 10M14 20h30" fill="none" stroke="var(--accent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>{{ site.name_html|safe }}</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" onclick="var n=document.getElementById('nav');var o=n.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
+    <nav id="nav" class="nav" aria-label="Sezioni">
+      <a href="/glossario/"{% if page_url.startswith('/glossario/') %} aria-current="page"{% endif %}>Glossario</a>
+      <a href="/rassegna/"{% if page_url.startswith('/rassegna/') %} aria-current="page"{% endif %}>Rassegna settimanale</a>
+      <a href="/corso/"{% if page_url.startswith('/corso/') %} aria-current="page"{% endif %}>Corso di aggiornamento</a>
+      <a href="/metodo/"{% if page_url == '/metodo/' %} aria-current="page"{% endif %}>Il metodo</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand">{{ site.name_html|safe }}</p>
+      <p class="muted">{{ site.payoff }}. Glossario, rassegna settimanale e corso di aggiornamento per chi lavora in magazzino, nei trasporti e nella supply chain.</p>
+      <p class="muted small">Progetto editoriale indipendente. Nessun link di affiliazione: il sito si sostiene con il corso e con gli sponsor di settore, dichiarati. <a href="/trasparenza/">Come funziona</a>.</p>
+    </div>
+    <div>
+      <p class="footer-title">Glossario per area</p>
+      <ul class="footer-list">
+        {% for a in areas %}<li><a href="{{ a.url }}">{{ a.name }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    <div>
+      <p class="footer-title">{{ site.name }}</p>
+      <ul class="footer-list">
+        <li><a href="/rassegna/">Rassegna settimanale</a></li>
+        <li><a href="/corso/">Corso di aggiornamento</a></li>
+        <li><a href="/metodo/">Il metodo: fonti, prezzi, correzioni</a></li>
+        <li><a href="/correzioni/">Registro delle correzioni</a></li>
+        <li><a href="/trasparenza/">Trasparenza e sponsor</a></li>
+        <li><a href="/chi-siamo/">Chi siamo</a></li>
+        <li><a href="/contatti/">Contatti</a></li>
+        <li><a href="/privacy/">Privacy e cookie</a></li>
+        <li><a href="/feed.xml">Feed RSS</a></li>
+        {% if site.linkedin %}<li><a href="{{ site.linkedin }}" rel="noopener" target="_blank">LinkedIn</a></li>{% endif %}
+        {% if site.facebook %}<li><a href="{{ site.facebook }}" rel="noopener" target="_blank">Facebook</a></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p class="small muted">© {{ year }} {{ site.name }} · saperelogistica.it · Redazione, nessuna firma individuale. Errori e prezzi vecchi: scrivi a {{ site.email }}; le correzioni sono <a href="/correzioni/">dichiarate qui</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
