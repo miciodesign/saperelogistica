@@ -148,6 +148,9 @@ def load_terms(areas: list[dict]) -> list[dict]:
             ERRORS.append(f"{path.name}: area '{meta.get('area')}' non esiste in config.json")
         if meta.get("slug") != path.stem:
             ERRORS.append(f"{path.name}: lo slug nel front matter deve coincidere col nome del file")
+        if 'class="fonte"' not in body:
+            ERRORS.append(f"{path.name}: manca il blocco <div class=\"fonte\"> in fondo alla voce; "
+                          "una voce senza fonte non si pubblica")
         html_body, _ = render_markdown(body)
         html_body = mark_external_links(html_body)
         term = {
