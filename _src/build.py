@@ -247,6 +247,79 @@ def check_internal_links() -> None:
                 ERRORS.append(f"{p.relative_to(ROOT)}: link interno rotto -> {target}")
 
 
+# ---------------------------------------------------------------- immagini di condivisione
+# Immagine og:image "di marca" per pagina (logo e colori del sito), generata con Pillow.
+# Niente foto di stock: si firma ogni link condiviso su Facebook/LinkedIn con il titolo.
+_FONT_DIR = "/usr/share/fonts/truetype/dejavu"
+
+
+def _font(bold: bool, size: int):
+    from PIL import ImageFont
+    name = "DejaVuSans-Bold.ttf" if bold else "DejaVuSans.ttf"
+    return ImageFont.truetype(f"{_FONT_DIR}/{name}", size)
+
+
+def _draw_mark(d, ox, oy, k, container, arrow, wheels, fill):
+    def P(x, y):
+        return (ox + x * k, oy + y * k)
+    ow = max(2, round(1.1 * k))
+    lw = max(1, round(0.42 * k))
+    aw = max(2, round(1.25 * k))
+    wr = 7 * k
+    d.rounded_rectangle([P(8, 30), P(92, 76)], radius=round(6 * k), outline=container, width=ow, fill=fill)
+    for x in (26, 50, 74):
+        d.line([P(x, 32), P(x, 74)], fill=container, width=lw)
+    d.line([P(20, 16), P(80, 16)], fill=arrow, width=aw)
+    d.line([P(68, 6), P(82, 16), P(68, 26)], fill=arrow, width=aw, joint="curve")
+    for cx in (28, 72):
+        d.ellipse([ox + cx * k - wr, oy + 86 * k - wr, ox + cx * k + wr, oy + 86 * k + wr], fill=wheels)
+
+
+def _wrap(d, text, font, max_w):
+    lines, cur = [], ""
+    for w in text.split():
+        t = (cur + " " + w).strip()
+        if d.textlength(t, font=font) <= max_w:
+            cur = t
+        else:
+            if cur:
+                lines.append(cur)
+            cur = w
+    if cur:
+        lines.append(cur)
+    return lines
+
+
+def share_image(slug: str, kicker: str, title: str) -> str | None:
+    """Genera assets/img/share/<slug>.png (1200x630) e torna il percorso pubblico.
+    Torna None se Pillow non è installato: in quel caso la pagina usa l'og:image di default."""
+    try:
+        from PIL import Image, ImageDraw
+    except Exception:
+        return None
+    NAVY, ORANGE, BG, BLUE, WHITE = "#122033", "#d9731b", "#f3f4f6", "#2f5d8a", "#ffffff"
+    W, H = 1200, 630
+    im = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(im)
+    d.rectangle([0, 0, W, 14], fill=ORANGE)
+    k = 1.5
+    _draw_mark(d, 90 - 8 * k, 95 - 49.5 * k, k, NAVY, ORANGE, NAVY, WHITE)
+    f_wm = _font(True, 40)
+    d.text((190, 72), "Sapere", font=f_wm, fill=NAVY)
+    d.text((190 + d.textlength("Sapere", font=f_wm), 72), "Logistica", font=f_wm, fill=ORANGE)
+    d.text((90, 210), kicker.upper(), font=_font(True, 26), fill=ORANGE)
+    f_t = _font(True, 60)
+    y = 258
+    for ln in _wrap(d, title, f_t, W - 180)[:4]:
+        d.text((90, y), ln, font=f_t, fill=NAVY)
+        y += 74
+    d.text((90, H - 70), "saperelogistica.it", font=_font(True, 30), fill=BLUE)
+    out = ROOT / "assets" / "img" / "share" / f"{slug}.png"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    im.save(out, optimize=True)
+    return f"/assets/img/share/{slug}.png"
+
+
 def build() -> None:
     clean_output()
     areas = [{**a, "url": f"/glossario/{a['slug']}/"} for a in CONFIG["aree"]]
@@ -300,9 +373,11 @@ def build() -> None:
         **base_ctx, rassegna=rassegna, page_url="/rassegna/",
         title=f"Rassegna settimanale · {CONFIG['name']}", description=CONFIG["rassegna"]["short"] + "."))
     for i, a in enumerate(rassegna):
+        img = share_image(a["slug"], f"Rassegna settimanale · {a['date_human']}", a["title"])
         write(ROOT / "rassegna" / a["slug"] / "index.html", env.get_template("rassegna-uscita.html").render(
             **base_ctx, a=a, prev=rassegna[i + 1] if i + 1 < len(rassegna) else None,
             nxt=rassegna[i - 1] if i > 0 else None, page_url=a["url"],
+            page_image=(SITE_URL + img) if img else None,
             title=f"{a['title']} · {CONFIG['name']}", description=a["description"]))
 
     # corso

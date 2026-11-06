@@ -11,7 +11,7 @@
 <meta property="og:description" content="{{ description }}">
 <meta property="og:url" content="{{ site_url }}{{ page_url }}">
 <meta property="og:type" content="{% block ogtype %}website{% endblock %}">
-<meta property="og:image" content="{{ site_url }}/assets/og-default.png">
+<meta property="og:image" content="{{ page_image or (site_url ~ '/assets/og-default.png') }}">
 <meta property="og:locale" content="it_IT">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
