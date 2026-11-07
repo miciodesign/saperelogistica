@@ -2,9 +2,9 @@
 term: Giacenza e tentativo di consegna
 slug: giacenza-e-tentativo-di-consegna
 area: trasporti
-description: Quando il corriere non riesce a consegnare, la spedizione va in giacenza nella filiale: il mittente deve dare istruzioni (nuova consegna, ritiro, reso) entro pochi giorni, pagando le spese; altrimenti il pacco torna indietro.
+description: Cosa significa "in giacenza", quanto dura, quanto costa e cosa fare quando un pacco non viene consegnato. La spedizione torna in filiale e attende istruzioni per pochi giorni, poi rientra al mittente.
 related: [corriere-espresso, ultimo-miglio, punto-di-ritiro-e-locker, contratto-di-trasporto, responsabilita-del-vettore]
-updated: 2026-10-28
+updated: 2026-11-07
 ---
 Il tentativo di consegna è il passaggio del corriere all'indirizzo del destinatario. Se la consegna non riesce (assente, indirizzo errato, rifiuto, merce non pagabile in contrassegno), la spedizione viene riportata in filiale e messa "in giacenza". Da quel momento il corriere avvisa il mittente e, spesso, il destinatario, e attende istruzioni per un numero limitato di giorni, dopo i quali la merce rientra al mittente. Il Codice civile inquadra la situazione nell'art. 1690: se il destinatario è irreperibile o rifiuta, il vettore deve chiedere istruzioni al mittente.
 
@@ -19,6 +19,16 @@ Per chi vende online la giacenza è un costo nascosto: oltre alle spese del corr
 - Il conteggio dei giorni parte dall'avviso di giacenza, non dal tentativo: controllare la data nella notifica.
 - Se nel contratto di vendita il trasporto è a carico del compratore, i costi di giacenza causati dalla sua assenza possono essergli addebitati; se la consegna è "franco destino", restano del venditore salvo accordo diverso.
 - Il contrassegno rifiutato genera un reso a pagamento: valutare se offrirlo.
+
+## Domande frequenti
+
+**Cosa significa che un pacco è "in giacenza"?** Significa che il corriere ha tentato la consegna senza riuscirci (destinatario assente, indirizzo errato, rifiuto, contrassegno non pagabile) e ha riportato la spedizione in filiale, dove resta in attesa di istruzioni.
+
+**Quanto dura la giacenza?** Dipende dal corriere: di solito pochi giorni di giacenza gratuita, indicati nelle sue condizioni generali. Il conteggio parte dalla data dell'avviso di giacenza, non dal tentativo di consegna. Scaduto il termine, la merce rientra al mittente.
+
+**Quanto costa la giacenza?** Le voci tipiche sono l'apertura della pratica, un costo per ogni giorno oltre il periodo gratuito e il costo della riconsegna o del reso. Gli importi sono nei listini del singolo corriere e vanno letti lì.
+
+**Cosa fare quando un pacco è in giacenza?** Dare istruzioni al corriere entro i giorni previsti: nuova consegna allo stesso indirizzo o a uno diverso, ritiro in filiale o in un [punto di ritiro](/glossario/punto-di-ritiro-e-locker/), oppure reso al mittente. Senza istruzioni, il pacco torna indietro.
 
 <div class="fonte" markdown="1">
 **Fonte.** Codice civile, art. 1690 (impedimenti alla riconsegna), su [Normattiva](https://www.normattiva.it/); condizioni generali di trasporto e listini dei singoli corrieri (voci "giacenza", "riconsegna", "reso al mittente"), che fissano giorni e costi. Per i servizi postali universali, D.Lgs. 261/1999 e Carta dei servizi di Poste Italiane.
