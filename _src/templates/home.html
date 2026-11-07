@@ -8,6 +8,7 @@
       <p class="lead">Un glossario in italiano con la fonte ufficiale accanto a ogni voce, una rassegna settimanale di quello che cambia davvero, un corso per rimettersi in pari. Scritto da una redazione, non da un ufficio marketing.</p>
       <div class="hero-cats">
         <a class="chip chip-strong" href="/glossario/">Glossario · {{ n_terms }} voci</a>
+        {% if guide %}<a class="chip" href="/guide/">Guide</a>{% endif %}
         <a class="chip" href="/rassegna/">Rassegna settimanale</a>
         <a class="chip" href="/corso/">Corso di aggiornamento</a>
       </div>
@@ -33,6 +34,25 @@
     {% endfor %}
   </div>
 </section>
+
+{% if guide %}
+<section class="wrap section">
+  <div class="section-head">
+    <h2>Guide e approfondimenti</h2>
+    <p class="muted">Dove il glossario spiega un termine, la guida mette in fila più voci attorno a un problema concreto: come funziona, cosa dice la norma, dove si sbaglia. Con le fonti ufficiali e i rimandi al glossario.</p>
+  </div>
+  <div class="post-list">
+    {% for g in guide[:3] %}
+    <article class="post-card">
+      <p class="post-cat">Guida · {{ g.minutes }} min</p>
+      <h3 class="h3"><a href="{{ g.url }}">{{ g.title }}</a></h3>
+      <p class="muted">{{ g.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% if guide|length > 3 %}<p style="margin-top:14px"><a href="/guide/">Tutte le guide →</a></p>{% endif %}
+</section>
+{% endif %}
 
 <section class="wrap section">
   <div class="two-col">

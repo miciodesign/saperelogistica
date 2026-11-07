@@ -395,7 +395,7 @@ def build() -> None:
 
     # home
     write(ROOT / "index.html", env.get_template("home.html").render(
-        **base_ctx, terms=terms, rassegna=rassegna, corso=corso, page_url="/",
+        **base_ctx, terms=terms, rassegna=rassegna, corso=corso, guide=guide, page_url="/",
         title=CONFIG["title"], description=CONFIG["description"]))
 
     # glossario
