@@ -215,6 +215,48 @@ def load_corso() -> list[dict]:
     return mods
 
 
+def load_guide(by_slug: dict) -> list[dict]:
+    """Guide e approfondimenti: pagine lunghe che legano più voci del glossario.
+    Il campo related collega la guida alle voci di glossario (controllato)."""
+    items = []
+    gdir = CONTENT / "guide"
+    if not gdir.exists():
+        return items
+    for path in sorted(gdir.glob("*.md")):
+        meta, body = parse_front_matter(path.read_text(encoding="utf-8"))
+        if meta.get("draft") == "true":
+            continue
+        for key in ("title", "slug", "description", "date"):
+            if not meta.get(key):
+                ERRORS.append(f"guide/{path.name}: manca '{key}' nel front matter")
+        if meta.get("slug") != path.stem:
+            ERRORS.append(f"guide/{path.name}: lo slug nel front matter deve coincidere col nome del file")
+        if 'class="fonte"' not in body:
+            ERRORS.append(f"guide/{path.name}: manca il blocco <div class=\"fonte\"> in fondo alla guida")
+        html_body, toc = render_markdown(body)
+        related = meta.get("related", []) if isinstance(meta.get("related"), list) else []
+        resolved = []
+        for r in related:
+            if r in by_slug:
+                resolved.append(by_slug[r])
+            else:
+                ERRORS.append(f"guide/{meta.get('slug')}.md: voce collegata '{r}' inesistente")
+        items.append({
+            **meta,
+            "body": mark_external_links(html_body),
+            "toc": toc,
+            "url": f"/guide/{meta['slug']}/",
+            "date_iso": iso(meta["date"]),
+            "date_human": human_date(meta["date"]),
+            "updated_iso": iso(meta.get("updated", meta["date"])),
+            "updated_human": human_date(meta.get("updated", meta["date"])),
+            "minutes": reading_time(body),
+            "related_obj": resolved,
+        })
+    items.sort(key=lambda g: g["date_iso"], reverse=True)
+    return items
+
+
 def load_pages() -> list[dict]:
     pages = []
     for path in sorted((CONTENT / "pagine").glob("*.md")):
@@ -328,8 +370,10 @@ def build() -> None:
         a["terms"] = [t for t in terms if t["area"] == a["slug"]]
         for t in a["terms"]:
             t["area_obj"] = a
+    by_slug = {t["slug"]: t for t in terms}
     rassegna = load_rassegna()
     corso = load_corso()
+    guide = load_guide(by_slug)
     pages = load_pages()
     letters = sorted({t["letter"] for t in terms})
 
@@ -380,6 +424,19 @@ def build() -> None:
             page_image=(SITE_URL + img) if img else None,
             title=f"{a['title']} · {CONFIG['name']}", description=a["description"]))
 
+    # guide e approfondimenti
+    write(ROOT / "guide" / "index.html", env.get_template("guide.html").render(
+        **base_ctx, guide=guide, page_url="/guide/",
+        title=f"Guide e approfondimenti · {CONFIG['name']}",
+        description="Guide pratiche alla logistica: temi spiegati per esteso, con le fonti ufficiali e i rimandi alle voci del glossario."))
+    for i, g in enumerate(guide):
+        img = share_image(g["slug"], "Guida", g["title"])
+        write(ROOT / "guide" / g["slug"] / "index.html", env.get_template("guida.html").render(
+            **base_ctx, g=g, prev=guide[i + 1] if i + 1 < len(guide) else None,
+            nxt=guide[i - 1] if i > 0 else None, page_url=g["url"],
+            page_image=(SITE_URL + img) if img else None,
+            title=f"{g['title']} · {CONFIG['name']}", description=g["description"]))
+
     # corso
     write(ROOT / "corso" / "index.html", env.get_template("corso.html").render(
         **base_ctx, corso=corso, page_url="/corso/",
@@ -402,11 +459,12 @@ def build() -> None:
         **base_ctx, page_url="/404.html", title=f"Pagina non trovata · {CONFIG['name']}", description=""))
 
     # sitemap, robots, feed
-    urls = ["/", "/glossario/", "/rassegna/", "/corso/"]
+    urls = ["/", "/glossario/", "/rassegna/", "/guide/", "/corso/"]
     urls += [a["url"] for a in areas] + [t["url"] for t in terms] + [a["url"] for a in rassegna]
-    urls += [m["url"] for m in corso] + [p["url"] for p in pages]
+    urls += [g["url"] for g in guide] + [m["url"] for m in corso] + [p["url"] for p in pages]
     lastmod = {t["url"]: t["updated_iso"] for t in terms if t["updated_iso"]}
     lastmod.update({a["url"]: a["updated_iso"] for a in rassegna})
+    lastmod.update({g["url"]: g["updated_iso"] for g in guide})
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:

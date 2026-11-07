@@ -10,7 +10,7 @@ L'ATP è l'accordo internazionale sul trasporto delle derrate deperibili e sui m
 
 ## In pratica
 
-Il certificato ATP ha una validità (sei anni per i veicoli nuovi, rinnovabile dopo prova) e la sigla sulla targhetta (per esempio FRC) indica le caratteristiche: F frigorifero, R isolamento rinforzato, C classe di temperatura fino a -20 °C. La temperatura durante il trasporto va registrata: i mezzi hanno registratori a bordo e i dati sono la prova della catena del freddo in caso di contestazione. La precarica (raffreddare il vano prima del carico) e il tempo di porte aperte in consegna sono i punti dove la catena si rompe più spesso.
+Il certificato ATP ha una validità (sei anni per i veicoli nuovi, rinnovabile dopo prova) e la sigla sulla targhetta (per esempio FRC) indica le caratteristiche: F frigorifero, R isolamento rinforzato, C classe di temperatura fino a -20 °C. La temperatura durante il trasporto va registrata: i mezzi hanno registratori a bordo e i dati sono la prova della catena del freddo in caso di contestazione. La precarica (raffreddare il vano prima del carico) e il tempo di porte aperte in consegna sono i punti dove la catena si rompe più spesso: su questo c'è la guida [La catena del freddo nel trasporto](/guide/catena-del-freddo/).
 
 ## Attenzione a
 

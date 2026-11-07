@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block ogtype %}article{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":{{ g.title|tojson }},"description":{{ g.description|tojson }},"datePublished":"{{ g.date_iso }}","dateModified":"{{ g.updated_iso }}","inLanguage":"it-IT","author":{"@type":"Organization","name":"Redazione {{ site.name }}","url":"{{ site_url }}/chi-siamo/"},"publisher":{"@type":"Organization","name":"{{ site.name }}","url":"{{ site_url }}/"},"mainEntityOfPage":"{{ site_url }}{{ g.url }}"}
+</script>
+{% endblock %}
+{% block content %}
+<article class="wrap article">
+  <header class="article-head">
+    <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <a href="/guide/">Guide e approfondimenti</a></nav>
+    <h1>{{ g.title }}</h1>
+    <p class="lead">{{ g.description }}</p>
+    <p class="meta">Redazione {{ site.name }} · {{ g.date_human }}{% if g.updated_iso != g.date_iso %} · aggiornata il {{ g.updated_human }}{% endif %} · {{ g.minutes }} minuti di lettura</p>
+  </header>
+
+  <div class="article-grid">
+    <aside class="toc">
+      {% if g.toc %}
+      <p class="toc-title">In questa guida</p>
+      {{ g.toc|safe }}
+      {% endif %}
+      {% if g.related_obj %}
+      <p class="toc-title" style="margin-top:14px">Voci collegate</p>
+      <ul>
+        {% for r in g.related_obj %}<li><a href="{{ r.url }}">{{ r.term }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </aside>
+    <div class="article-body">{{ g.body|safe }}</div>
+  </div>
+
+  <footer class="article-foot">
+    <p class="small muted">Questa guida è scritta dalla redazione e verificata sulle fonti indicate. Se trovi un errore o una norma superata, scrivi a {{ site.email }}: correggiamo e lo dichiariamo nel <a href="/correzioni/">registro delle correzioni</a>.</p>
+    <p class="small">{% if prev %}← <a href="{{ prev.url }}">{{ prev.title }}</a>{% endif %}{% if prev and nxt %} · {% endif %}{% if nxt %}<a href="{{ nxt.url }}">{{ nxt.title }}</a> →{% endif %}</p>
+  </footer>
+</article>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="wrap section">
+  <nav class="crumbs" aria-label="Percorso"><a href="/">Home</a> › <span>Guide e approfondimenti</span></nav>
+  <h1>Guide e approfondimenti</h1>
+  <p class="lead">Temi della logistica spiegati per esteso, in una pagina sola: come funziona una cosa, cosa dice la norma, dove si sbaglia più spesso. Ogni guida rimanda alle voci del glossario e cita le fonti ufficiali.</p>
+</section>
+
+<section class="wrap section">
+  {% if guide %}
+  <div class="post-list">
+    {% for g in guide %}
+    <article class="post-card">
+      <p class="post-cat">Guida · {{ g.minutes }} min</p>
+      <h2 class="h3"><a href="{{ g.url }}">{{ g.title }}</a></h2>
+      <p class="muted">{{ g.description }}</p>
+    </article>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="notice">
+    <p><strong>Le prime guide sono in preparazione.</strong> Nel frattempo il <a href="/glossario/">glossario</a> raccoglie i singoli termini, ciascuno con la sua fonte.</p>
+  </div>
+  {% endif %}
+</section>
+
+<section class="wrap section">
+  <div class="article-body narrow">
+    <h2>Come sono fatte</h2>
+    <p>Una guida non sostituisce il glossario: lo lega. Dove una voce spiega un termine, la guida mette in fila più termini attorno a un problema concreto — la catena del freddo, i costi di una spedizione, chi risponde di cosa in un trasporto — e indica dove approfondire. Valgono le stesse regole del resto del sito: fonti ufficiali sempre citate, nessun link di affiliazione, correzioni <a href="/correzioni/">dichiarate</a>.</p>
+  </div>
+</section>
+{% endblock %}
