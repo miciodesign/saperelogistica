@@ -2,9 +2,9 @@
 term: Peso volumetrico
 slug: peso-volumetrico
 area: trasporti
-description: Come si calcola il peso volumetrico, quale divisore usare (aereo, corriere, strada) e perché si paga il maggiore tra peso reale e volumetrico. Con esempio pratico.
+description: Come si misura un collo e come si calcola il peso volumetrico, quale divisore usare (aereo, corriere, strada) e perché si paga il maggiore tra peso reale e volumetrico. Con esempio pratico.
 related: [packing, corriere-espresso, lettera-di-trasporto-aereo-awb, nolo]
-updated: 2026-11-07
+updated: 2026-11-10
 ---
 Un collo leggero ma ingombrante occupa spazio che il vettore non può vendere ad altri: per questo le tariffe si calcolano sul maggiore tra peso reale e peso volumetrico. Il peso volumetrico si ottiene moltiplicando lunghezza, larghezza e altezza in centimetri e dividendo per un divisore che dipende dal vettore e dal modo di trasporto.
 
@@ -23,6 +23,8 @@ I corrieri misurano i colli con scanner volumetrici automatici negli hub e rifat
 **Qual è il divisore del peso volumetrico?** Dipende dal modo di trasporto: 6.000 nell'aereo (standard IATA), 5.000 o 4.000 nei corrieri espressi, 3.000 o meno nel trasporto stradale a collettame. Nel marittimo si ragiona per metro cubo e tonnellata.
 
 **Perché si paga il peso volumetrico e non quello reale?** Un collo leggero ma ingombrante occupa spazio che il vettore non può vendere ad altri. Per questo la tariffa si calcola sul **maggiore** tra peso reale e peso volumetrico.
+
+**Come si misura un collo per la spedizione?** Si rilevano le tre dimensioni esterne dell'imballaggio — lunghezza, larghezza e altezza — nel punto massimo, includendo bordi, rinforzi e sporgenze, e si arrotonda per eccesso. Sono queste misure, non quelle del prodotto nudo, a determinare il peso volumetrico: gli scanner degli hub leggono l'ingombro reale del collo chiuso.
 
 **Conviene ridurre il peso o le dimensioni del collo?** Quando domina il volumetrico, ridurre le dimensioni della scatola vale più che ridurre il peso: è lo scopo di un buon [packing](/glossario/packing/).
 
