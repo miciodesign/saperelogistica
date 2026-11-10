@@ -10,7 +10,7 @@ La regola è una presunzione di responsabilità: se la merce arriva danneggiata 
 
 ## In pratica
 
-Per merce di valore superiore al limite, le strade sono due: dichiarare il valore nel contratto e pagare un corrispettivo più alto, oppure assicurare la merce (polizza *all risks* del proprietario, separata dalla responsabilità del vettore). I termini per far valere il danno sono stretti: i danni visibili vanno contestati alla consegna con riserva scritta; quelli non riconoscibili entro otto giorni dal ricevimento (sette giorni lavorativi nella CMR); l'azione si prescrive in un anno.
+Per merce di valore superiore al limite, le strade sono due: dichiarare il valore nel contratto e pagare un corrispettivo più alto, oppure assicurare la merce (polizza *all risks* del proprietario, separata dalla responsabilità del vettore). I termini per far valere il danno sono stretti: i danni visibili vanno contestati alla consegna con riserva scritta; quelli non riconoscibili entro otto giorni dal ricevimento (sette giorni lavorativi nella CMR); l'azione si prescrive in un anno. Come si recupera davvero in base al modo di trasporto è spiegato nella guida [Chi risponde della merce: la responsabilità del vettore e i suoi limiti](/guide/responsabilita-vettore-risarcimento-merce/).
 
 ## Attenzione a
 
